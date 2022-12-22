@@ -39,11 +39,11 @@ def get_labels(inputs, netF_list, netB_list, netC_list, netG_list):
         outputs_all_w = torch.zeros(inputs.shape[0], args.class_num)
 
         for i in range(len(args.src)):
-        	features = netB_list[i](netF_list[i](inputs))
-        	outputs = netC_list[i](features)
-        	weights = netG_list[i](features)
-        	outputs_all[i] = outputs
-        	weights_all[:, i] = weights.squeeze()
+            features = netB_list[i](netF_list[i](inputs))
+            outputs = netC_list[i](features)
+            weights = netG_list[i](features)
+            outputs_all[i] = outputs
+            weights_all[:, i] = weights.squeeze()
 
         z = torch.sum(weights_all, dim=1)
         z = z + 1e-16
